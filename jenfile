@@ -26,3 +26,22 @@ stage("test"){
             }
         }
 
+environment {
+    SONAR_TOKEN = credentials('SONAR_TOKEN')
+}
+stage('SonarQube Analysis') {
+            steps {
+                script {
+                    // Run SonarQube analysis
+                    sh """
+                    mvn sonar:sonar \
+                    -Dsonar.projectKey=Chandanasai1712_cicd-taxiapp \
+                    -Dsonar.organization=taxiapp \
+                    -Dsonar.host.url=https://sonarcloud.io \
+                    -Dsonar.token=${SONAR_TOKEN}
+                    """
+                }
+            }
+        }
+
+
