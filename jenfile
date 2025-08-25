@@ -27,7 +27,7 @@ stage("test"){
         }
 
 environment {
-    SONAR_TOKEN = credentials('SONAR_TOKEN')
+    SONAR_TOKEN = credentials('1459bb48212e6998a43ff03c84dc1854b996c1cd')
 }
 stage('SonarQube Analysis') {
             steps {
