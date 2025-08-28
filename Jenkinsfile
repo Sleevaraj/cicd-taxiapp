@@ -6,7 +6,7 @@ pipeline {
     }
 environment {
     PATH = "/opt/apache-maven-3.9.6/bin:$PATH"
-    SONAR_TOKEN = credentials('6cd032e7d0de734b9bc402baca325cd227189d8a')
+    SONAR_TOKEN = credentials('SONAR_TOKEN')
     
 }
    stages {
@@ -24,8 +24,6 @@ environment {
                  echo "----------- unit test Complted ----------"
             }
         }
-
-}
     stage('SonarQube Analysis') {
             steps {
                 script {
@@ -40,5 +38,6 @@ environment {
                 }
             }
         }
+}  
 }
 
