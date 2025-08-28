@@ -6,6 +6,7 @@ pipeline {
     }
 environment {
     PATH = "/opt/apache-maven-3.9.6/bin:$PATH"
+    SONAR_TOKEN = credentials('6cd032e7d0de734b9bc402baca325cd227189d8a')
     
 }
    stages {
@@ -22,7 +23,22 @@ environment {
                 sh 'mvn surefire-report:report'
                  echo "----------- unit test Complted ----------"
             }
-        }   
+        }
+
 }
+    stage('SonarQube Analysis') {
+            steps {
+                script {
+                    // Run SonarQube analysis
+                    sh """
+                    mvn sonar:sonar \
+                    -Dsonar.projectKey=Chandanasai1712_cicd-taxiapp \
+                    -Dsonar.organization=taxiapp \
+                    -Dsonar.host.url=https://sonarcloud.io \
+                    -Dsonar.token=${SONAR_TOKEN}
+                    """
+                }
+            }
+        }
 }
 
