@@ -6,7 +6,7 @@ data "aws_vpc" "default" {
 }
 
 # Get default subnets
-data "aws_subnets" "default" {
+data "aws_subnets" "suported" {
   filter {
     name   = "vpc-id"
     values = [data.aws_vpc.default.id]
@@ -115,7 +115,7 @@ module "sgs" {
 module "eks" {
   source     = "../eks"
   vpc_id     = data.aws_vpc.default.id
-  subnet_ids = data.aws_subnets.default.ids
+  subnet_ids = data.aws_subnets.supported.ids
   sg_ids     = module.sgs.security_group_public
 }
 
